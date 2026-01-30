@@ -29,32 +29,34 @@ const getCaption = (type: "defusing" | "planting", player: Player | null) => {
 };
 const Bomb = ({ timer, side }: IProps) => {
   if (!timer) return null;
+
+  const maxTime =
+    timer.type === "planting"
+      ? MAX_TIMER.planting
+      : timer.player?.state.defusekit
+        ? MAX_TIMER.defuse_kit
+        : MAX_TIMER.defuse_nokit;
+
+  const progress = Math.min(timer.time / maxTime, 1);
+
   return (
     <div
       className={`defuse_plant_container ${side} ${
-        timer && timer.active ? "show" : "hide"
-      }`}
+        timer.active ? "show" : "hide"
+      } ${timer.type}`}
     >
-      {timer ? (
-        <div className={`defuse_plant_caption`}>
-          {getCaption(timer.type, timer.player)}
-        </div>
-      ) : null}
+      <div className="defuse_plant_caption">
+        {getCaption(timer.type, timer.player)}
+      </div>
 
       <div
         className="defuse_plant_bar"
         style={{
-          width: `${
-            (timer.time * 100) /
-            (timer.type === "planting"
-              ? MAX_TIMER.planting
-              : timer.player?.state.defusekit
-              ? MAX_TIMER.defuse_kit
-              : MAX_TIMER.defuse_nokit)
-          }%`,
+          ["--mask-progress" as any]: `${progress * 100}%`,
         }}
-      ></div>
+      />
     </div>
   );
 };
+
 export default Bomb;

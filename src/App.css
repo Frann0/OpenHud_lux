@@ -39,12 +39,12 @@ code {
 }
 
 :root {
-  --sub-panel-color: rgba(11, 26, 43, 0.75);
+  --sub-panel-color: rgba(11, 26, 43, 0.85);
   --main-panel-color: rgba(11, 26, 43, 0.95);
   --sub-panel-gradient: linear-gradient(
     270deg,
-    rgba(11, 26, 43, 0.75) 0%,
-    rgba(11, 26, 43, 0.5) 100%
+    rgba(11, 26, 43, 0.95) 0%,
+    rgba(11, 26, 43, 0.75) 100%
   );
   --gold: #d4af37;
   --muted-gold: #b8962e;

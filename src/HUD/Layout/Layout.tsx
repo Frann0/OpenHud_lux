@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TeamBox from "./../Players/TeamBox";
 import MatchBar from "../MatchBar/MatchBar";
 import SeriesBox from "../MatchBar/SeriesBox";
@@ -39,6 +39,10 @@ const Layout = ({ game, match }: Props) => {
       setForceHide(true);
     }
   });
+
+  useEffect(() => {
+    console.log(forceHide);
+  }, [forceHide]);
 
   const left =
     game.map.team_ct.orientation === "left"
@@ -111,14 +115,14 @@ const Layout = ({ game, match }: Props) => {
         isFreezetime={isFreezetime}
         map={game.map}
       />
-      <div className={"boxes left"}>
+      <div className={`boxes left ${!isFreezetime ? "hide" : ""}`}>
         <UtilityLevel
           side={left.side}
           players={game.players}
           show={isFreezetime && !forceHide}
         />
-        <div className="boxes_divider"></div>
-        <SideBox side="left" hide={forceHide} />
+        <div className={`boxes_divider ${!isFreezetime ? "hide" : ""}`}></div>
+        <SideBox side="left" hide={!forceHide} />
         <MoneyBox
           team={left.side}
           side="left"
@@ -132,13 +136,13 @@ const Layout = ({ game, match }: Props) => {
           show={isFreezetime && !forceHide}
         />
       </div>
-      <div className={"boxes right"}>
+      <div className={`boxes right ${!isFreezetime ? "hide" : ""}`}>
         <UtilityLevel
           side={right.side}
           players={game.players}
           show={isFreezetime && !forceHide}
         />
-        <div className="boxes_divider"></div>
+        <div className={`boxes_divider ${!isFreezetime ? "hide" : ""}`}></div>
         <SideBox side="right" hide={forceHide} />
         <MoneyBox
           team={right.side}

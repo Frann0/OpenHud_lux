@@ -4,6 +4,7 @@ import Avatar from "./Avatar";
 import Armor from "./../Indicators/Armor";
 import Bomb from "./../Indicators/Bomb";
 import Defuse from "./../Indicators/Defuse";
+import Health from "../../assets/images/health.svg";
 import React from "react";
 import { Kills, Skull } from "../../assets/Icons";
 
@@ -29,13 +30,13 @@ const compareWeapon = (weaponOne: I.WeaponRaw, weaponTwo: I.WeaponRaw) => {
 
 const compareWeapons = (
   weaponsObjectOne: I.Weapon[],
-  weaponsObjectTwo: I.Weapon[]
+  weaponsObjectTwo: I.Weapon[],
 ) => {
   const weaponsOne = [...weaponsObjectOne].sort((a, b) =>
-    a.name.localeCompare(b.name)
+    a.name.localeCompare(b.name),
   );
   const weaponsTwo = [...weaponsObjectTwo].sort((a, b) =>
-    a.name.localeCompare(b.name)
+    a.name.localeCompare(b.name),
   );
 
   if (weaponsOne.length !== weaponsTwo.length) return false;
@@ -87,7 +88,7 @@ const Player = ({ player, isObserved }: IProps) => {
   const primary =
     weapons.filter(
       (weapon) =>
-        !["C4", "Pistol", "Knife", "Grenade", undefined].includes(weapon.type)
+        !["C4", "Pistol", "Knife", "Grenade", undefined].includes(weapon.type),
     )[0] || null;
   const secondary =
     weapons.filter((weapon) => weapon.type === "Pistol")[0] || null;
@@ -96,6 +97,103 @@ const Player = ({ player, isObserved }: IProps) => {
   const zeus = weapons.find((weapon) => weapon.name === "taser") || null;
 
   return (
+    <div className={`player_wrapper ${isObserved ? "active" : ""}`}>
+      <div className={`player ${player.state.health === 0 ? "dead" : ""} `}>
+        <Avatar
+          teamId={player.team.id}
+          steamid={player.steamid}
+          height={60}
+          width={60}
+          showSkull={false}
+          showCam={false}
+          sidePlayer={true}
+          teamSide={player.team.side}
+        />
+        <div className="player_data">
+          <div className="player_name">{player.name}</div>
+          <div className="player_money">${player.state.money}</div>
+          <div className="player_stats">
+            <div className="player-kills">
+              <Kills />
+              <div className="stat-value">{player.stats.kills}</div>
+              {player.state.round_kills > 0 && (
+                <div className="roundkills">+{player.state.round_kills}</div>
+              )}
+            </div>
+            <div className="player-deaths">
+              <Skull />
+              <div className="stat-value">{player.stats.deaths}</div>
+            </div>
+          </div>
+        </div>
+        {player.state.health > 0 && (
+          <>
+            <div className="player_hp">
+              <div className="player_hp_group">
+                <img src={Health} className="health_icon" />
+                <div className="health">
+                  {player.state.health > 0 && player.state.health}
+                </div>
+              </div>
+              <Armor
+                health={player.state.health}
+                armor={player.state.armor}
+                helmet={player.state.helmet}
+              />
+            </div>
+            <div className="player_weapons">
+              {primary || secondary || zeus ? (
+                <Weapon
+                  weapon={
+                    primary ? primary.name : secondary ? secondary.name : "zeus"
+                  }
+                  active={
+                    primary
+                      ? primary.state === "active"
+                      : secondary
+                        ? secondary.state === "active"
+                        : zeus
+                          ? zeus.state === "active"
+                          : false
+                  }
+                />
+              ) : (
+                ""
+              )}
+              <div className="grenades">
+                <div className="defuser_bomb">
+                  <Bomb player={player} />
+                  <Defuse player={player} />
+                </div>
+                {grenades.map((grenade) => [
+                  <Weapon
+                    key={`${grenade.name}-${grenade.state}`}
+                    weapon={grenade.name}
+                    active={grenade.state === "active"}
+                    isGrenade
+                  />,
+                  grenade.ammo_reserve === 2 ? (
+                    <Weapon
+                      key={`${grenade.name}-${grenade.state}-double`}
+                      weapon={grenade.name}
+                      active={false}
+                      isGrenade
+                    />
+                  ) : null,
+                ])}
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+      {player.state.health === 0 && (
+        <div className="round_damage">
+          ROUND DMG: {player.state.round_totaldmg}
+        </div>
+      )}
+      <div className="hp_bar" style={{ width: `${player.state.health}%` }} />
+    </div>
+    /**
     <div
       className={`player ${player.state.health === 0 ? "dead" : ""} ${
         isObserved ? "active" : ""
@@ -202,12 +300,13 @@ const Player = ({ player, isObserved }: IProps) => {
         <div className="active_border"></div>
       </div>
     </div>
+*/
   );
 };
 
 const arePropsEqual = (
   prevProps: Readonly<IProps>,
-  nextProps: Readonly<IProps>
+  nextProps: Readonly<IProps>,
 ) => {
   if (prevProps.isObserved !== nextProps.isObserved) return false;
 

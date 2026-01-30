@@ -6,7 +6,6 @@
   flex-direction: column;
   gap: 2.5px;
   background-color: var(--sub-panel-color);
-  border-radius: var(--border-radius);
   box-sizing: border-box;
 
   &_divider {
@@ -22,12 +21,17 @@
 }
 
 .boxes.left {
-  left: 10px;
+  left: 0px;
+  border-radius: 0 var(--border-radius) var(--border-radius) 0;
 }
 .boxes.right {
-  right: 10px;
+  right: 0px;
+
+  border-radius: var(--border-radius) 0 0 var(--border-radius);
 }
 .boxes.hide {
+  opacity: 0;
+  height: 0;
   .utilitybox {
     height: 0;
     opacity: 0;
@@ -40,7 +44,13 @@
     height: 0;
     opacity: 0;
   }
+
+  .boxes_divider {
+    height: 0;
+    opacity: 0;
+  }
 }
+
 .utilitybox.hide {
   height: 0;
   opacity: 0;
