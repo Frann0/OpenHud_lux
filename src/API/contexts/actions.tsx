@@ -28,7 +28,7 @@ type Callback<K> = K extends BaseEvents
 export function useAction<T extends keyof AllActions>(
   action: T,
   callback: ActionHandler<T extends keyof AllActions ? AllActions[T] : never>,
-  deps?: React.DependencyList
+  deps?: React.DependencyList,
 ) {
   useEffect(
     () => {
@@ -37,7 +37,7 @@ export function useAction<T extends keyof AllActions>(
         actions.off(action, callback);
       };
     },
-    deps ? [action, ...deps] : [action, callback]
+    deps ? [action, ...deps] : [action, callback],
   );
   return null;
 }
@@ -53,7 +53,7 @@ export function useOnConfigChange<K extends keyof Sections, T = any>(
       }
     | null
   >,
-  deps?: React.DependencyList
+  deps?: React.DependencyList,
 ) {
   useEffect(
     () => {
@@ -68,7 +68,7 @@ export function useOnConfigChange<K extends keyof Sections, T = any>(
         configs.off(onDataChanged);
       };
     },
-    deps ? [section, ...deps] : [section, callback]
+    deps ? [section, ...deps] : [section, callback],
   );
 
   return null;
@@ -77,24 +77,25 @@ export function useOnConfigChange<K extends keyof Sections, T = any>(
 export function ONGSI<T extends BaseEvents>(
   event: T,
   callback: Callback<T>,
-  deps?: React.DependencyList
+  deps?: React.DependencyList,
 ) {
   useEffect(
     () => {
+      console.log(event);
       GSI.on(event, callback);
 
       return () => {
         GSI.off(event, callback);
       };
     },
-    deps ? [event, ...deps] : [event, callback]
+    deps ? [event, ...deps] : [event, callback],
   );
 }
 
 const SettingsContext = createContext<AllInputs | null>({} as AllInputs);
 export const SettingsProvider = ({ children }: { children: ReactNode }) => {
   const [data, setData] = useState<AllInputs | null>(
-    (configs.data as AllInputs) || null
+    (configs.data as AllInputs) || null,
   );
 
   useEffect(() => {

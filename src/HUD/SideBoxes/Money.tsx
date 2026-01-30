@@ -3,7 +3,7 @@ import React from "react";
 const LossBox = React.memo(
   ({ active, side }: { active: boolean; side: "CT" | "T" }) => {
     return <div className={`loss-box ${side} ${active ? "active" : ""}`}></div>;
-  }
+  },
 );
 
 interface Props {
@@ -22,6 +22,7 @@ const Money = ({ side, team, loss, equipment, money, show }: Props) => {
         <div className="title">Team Money</div>
         <div className="value">${money}</div>
       </div>
+      <div className="money_divider"></div>
       <div className="money_container">
         <div className="title">Loss Bonus</div>
         <div className="value">${loss}</div>

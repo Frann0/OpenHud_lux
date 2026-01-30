@@ -11,8 +11,7 @@ const Timeout = ({ phase, map }: IProps) => {
 
   return (
     <div
-      id={`timeout`}
-      className={`${
+      className={` timeout_wrapper ${
         time &&
         time > 2 &&
         phase &&
@@ -25,8 +24,13 @@ const Timeout = ({ phase, map }: IProps) => {
           : ""
       }`}
     >
-      <div className={team.side}>{team.name}&nbsp;</div>
-      <div>TIME OUT</div>
+      <div className="corner-box"></div>
+      <div id={`timeout`}>
+        <div className={team.side}>{team.name}&nbsp;</div>
+        <div>TIME OUT</div>
+      </div>
+
+      <div className="corner-box right"></div>
     </div>
   );
 };

@@ -50,10 +50,10 @@ const Layout = ({ game, match }: Props) => {
       : game.map.team_ct;
 
   const leftPlayers = game.players.filter(
-    (player) => player.team.side === left.side
+    (player) => player.team.side === left.side,
   );
   const rightPlayers = game.players.filter(
-    (player) => player.team.side === right.side
+    (player) => player.team.side === right.side,
   );
   const isFreezetime =
     (game.round && game.round.phase === "freezetime") ||
@@ -62,6 +62,7 @@ const Layout = ({ game, match }: Props) => {
     <div className="layout">
       <div className={`players_alive`}>
         <div className="title_container">Players alive</div>
+        <div className="players_divider"></div>
         <div className="counter_container">
           <div className={`team_counter ${left.side}`}>
             {leftPlayers.filter((player) => player.state.health > 0).length}
@@ -116,6 +117,7 @@ const Layout = ({ game, match }: Props) => {
           players={game.players}
           show={isFreezetime && !forceHide}
         />
+        <div className="boxes_divider"></div>
         <SideBox side="left" hide={forceHide} />
         <MoneyBox
           team={left.side}
@@ -136,6 +138,7 @@ const Layout = ({ game, match }: Props) => {
           players={game.players}
           show={isFreezetime && !forceHide}
         />
+        <div className="boxes_divider"></div>
         <SideBox side="right" hide={forceHide} />
         <MoneyBox
           team={right.side}

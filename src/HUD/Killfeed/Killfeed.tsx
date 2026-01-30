@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { KillEvent, Player } from "csgogsi";
 import Kill from "./Kill";
@@ -16,12 +16,15 @@ export interface BombEvent {
 
 const Killfeed = () => {
   const [events, setEvents] = useState<(BombEvent | ExtendedKillEvent)[]>([]);
+
+  useEffect(() => {}, []);
   ONGSI(
     "kill",
     (kill) => {
+      console.log(kill);
       setEvents((ev) => [...ev, { ...kill, type: "kill" }]);
     },
-    []
+    [],
   );
   ONGSI(
     "data",
@@ -35,8 +38,9 @@ const Killfeed = () => {
         }
       }
     },
-    []
+    [],
   );
+
   return (
     <div className="killfeed">
       {events.map((event) => (

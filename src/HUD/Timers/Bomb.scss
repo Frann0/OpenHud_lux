@@ -1,0 +1,47 @@
+#bomb_container {
+  width: 48px;
+  height: 48px;
+}
+
+.bomb_radial {
+  display: block;
+}
+
+.bomb_icon_inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.show {
+  opacity: 1;
+  transform: scale(1);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.hide {
+  opacity: 0;
+  transform: scale(0.9);
+  pointer-events: none;
+}
+
+.bomb_critical {
+  animation: bomb-pulse 0.6s ease-in-out infinite;
+  filter: drop-shadow(0 0 6px rgba(231, 76, 60, 0.75));
+}
+
+@keyframes bomb-pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

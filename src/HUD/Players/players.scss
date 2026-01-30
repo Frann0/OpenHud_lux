@@ -131,6 +131,7 @@
 
       .obs_slot {
         position: absolute;
+        display: none !important;
         display: flex;
         width: 20px;
         height: 20px;
@@ -380,19 +381,39 @@
 .players_alive {
   display: flex;
   flex-direction: column;
-  width: 180px;
-  background-color: var(--sub-panel-color);
-  border-radius: var(--border-radius);
+  width: 200px;
+  //background-color: var(--sub-panel-color);
+  background: var(--sub-panel-gradient);
+  border-radius: var(--border-radius) 0 0 var(--border-radius);
   position: fixed;
-  right: 10px;
+  right: 0px;
   top: 10px;
   opacity: 1;
   transition: width 0.5s;
+  padding-left: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 5px;
+  gap: 5px;
+  border: 1px solid var(--gold);
+  /**
+  border: 1px solid;
+  border-image-slice: 1;
+  border-width: 1px;
+  border-image-source: var(--border-gold-reverse);
+  */
+
+  .players_divider {
+    background: var(--divider-gold);
+    height: 1px;
+    width: 100%;
+  }
   .counter_container {
     display: flex;
-    height: 45px;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
     > div {
-      flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -410,10 +431,10 @@
   .title_container {
     color: white;
     text-transform: uppercase;
-    text-align: center;
     height: 20px;
     font-size: 14px;
     font-weight: 600;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
