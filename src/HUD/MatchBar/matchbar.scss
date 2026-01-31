@@ -49,6 +49,7 @@
     flex-direction: column;
     position: relative;
     width: 126px;
+    min-width: 126px;
     height: 87px;
     background-color: var(--sub-panel-color);
     top: -10px;
@@ -142,23 +143,27 @@
     }
   }
   .team {
-    width: 275px;
+    width: 300px;
     display: flex;
     align-items: center;
+
+    min-width: 0; /* important */
     .logo {
       display: flex;
       flex-direction: row;
-      width: 105px;
+      width: 60px;
       height: 60px;
       align-items: center;
       overflow: hidden;
       background-color: var(--sub-panel-color);
       justify-content: center;
+      flex-shrink: 0;
 
       border-top: 1px solid var(--gold);
       border-bottom: 1px solid var(--gold);
       box-sizing: border-box;
       img {
+        object-fit: contain;
         max-width: 90%;
         max-height: 65%;
       }
@@ -182,18 +187,32 @@
   }
   .team-name {
     display: flex;
-    width: 360px;
+    flex: 1 1 auto;
     height: 60px;
+    min-width: 0;
+
     align-items: center;
     justify-content: center;
+
     font-weight: 700;
-    font-size: 28px;
+    font-size: 18px;
     color: white;
+
     background-color: var(--sub-panel-color);
 
     border-top: 1px solid var(--gold);
     border-bottom: 1px solid var(--gold);
     box-sizing: border-box;
+
+    &__text {
+      display: block; /* enables ellipsis */
+      max-width: 100%;
+      min-width: 0; /* REQUIRED inside flex */
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      text-align: center;
+    }
   }
   .score {
     display: flex;
@@ -296,6 +315,13 @@
     background: linear-gradient(90deg, #2b1206 0%, #b03a00 40%, #ff8a3d 100%);
   }
 
+  .defuse_plant_caption svg,
+  .defuse_plant_caption .CT,
+  .defuse_plant_caption .T {
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
   .defuse_plant_bar {
     position: absolute;
     inset: 0;
@@ -342,6 +368,8 @@
     text-transform: uppercase;
     font-weight: 600;
     align-items: flex-end;
+    padding: 0 14px;
+    min-width: 0;
 
     .CT {
       color: white !important;
@@ -349,6 +377,22 @@
 
     .T {
       color: white !important;
+      white-space: nowrap;
+    }
+
+    .T_Name {
+      flex: 1 1 auto;
+      min-width: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .CT_Name {
+      flex: 1 1 auto;
+      min-width: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     svg {

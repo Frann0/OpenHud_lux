@@ -2,6 +2,8 @@ import { Team } from "csgogsi";
 import * as I from "../../API/types";
 import { apiUrl } from "./../../API";
 import { LogoCT, LogoT } from "../../assets/Icons";
+import { useEffect } from "react";
+import axios from "axios";
 
 const TeamLogo = ({
   team,
@@ -20,11 +22,20 @@ const TeamLogo = ({
   } else if ("id" in team && team.id) {
     id = team.id;
   }
+
+  useEffect(() => {
+    console.log(team);
+  }, []);
   // ${apiUrl}/teams/${id}/logo - Old way of getting the logo
   return (
     <div className={`logo`}>
       {logo && id ? (
-        <img src={`${logo}`} width={width} height={height} alt={"Team logo"} />
+        <img
+          src={`http://localhost:1349/api/teams/logo/${id}`}
+          width={width}
+          height={height}
+          alt={"Team logo"}
+        />
       ) : (
         ""
       )}

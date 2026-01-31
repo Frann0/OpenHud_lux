@@ -41,8 +41,8 @@ const Layout = ({ game, match }: Props) => {
   });
 
   useEffect(() => {
-    console.log(forceHide);
-  }, [forceHide]);
+    console.log(game);
+  }, []);
 
   const left =
     game.map.team_ct.orientation === "left"

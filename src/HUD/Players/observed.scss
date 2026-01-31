@@ -100,6 +100,9 @@
           position: relative;
           width: 140px;
           height: 140px;
+          > img {
+            object-fit: contain;
+          }
         }
       }
 

@@ -27,10 +27,10 @@ const App = () => {
           let isReversed = false;
           if (GSI.last) {
             const mapName = GSI.last.map.name.substring(
-              GSI.last.map.name.lastIndexOf("/") + 1
+              GSI.last.map.name.lastIndexOf("/") + 1,
             );
             const current = match.vetos.filter(
-              (veto) => veto.mapName === mapName
+              (veto) => veto.mapName === mapName,
             )[0];
             if (current && current.reverseSide) {
               isReversed = true;
@@ -38,6 +38,7 @@ const App = () => {
           }
           if (match.left.id) {
             api.teams.getTeam(match.left.id).then((left) => {
+              console.log(left);
               const gsiTeamData = {
                 id: left._id,
                 name: left.name,
@@ -86,7 +87,7 @@ const App = () => {
     (game) => {
       setGame(game);
     },
-    []
+    [],
   );
 
   if (!game) return null;

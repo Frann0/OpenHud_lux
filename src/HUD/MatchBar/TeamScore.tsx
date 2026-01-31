@@ -25,13 +25,15 @@ const TeamScore = ({ orientation, timer, team }: IProps) => {
         setShow(false);
       }, 5000);
     },
-    [orientation]
+    [orientation],
   );
 
   return (
     <>
       <div className={`team ${orientation}`}>
-        <div className="team-name">{team?.name || null}</div>
+        <div className="team-name">
+          <span className="team-name__text">{team?.name || null}</span>
+        </div>
         <TeamLogo team={team} />
       </div>
       <PlantDefuse timer={timer} side={orientation} />

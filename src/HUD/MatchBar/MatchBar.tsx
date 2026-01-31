@@ -4,6 +4,7 @@ import TeamScore from "./TeamScore";
 import Bomb from "./../Timers/BombTimer";
 import { useBombTimer } from "./../Timers/Countdown";
 import { Match } from "./../../API/types";
+import { useEffect } from "react";
 
 function stringToClock(time: string | number, pad = true) {
   if (typeof time === "string") {
@@ -49,6 +50,10 @@ const Matchbar = (props: IProps) => {
   const isPlanted =
     bomb && (bomb.state === "defusing" || bomb.state === "planted");
   const bo = (match && Number(match.matchType.substr(-1))) || 0;
+
+  useEffect(() => {
+    console.log(map);
+  }, []);
 
   const bombData = useBombTimer();
   const plantTimer: Timer | null =

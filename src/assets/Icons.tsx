@@ -26,7 +26,7 @@ import Suicide from "./../assets/images/suicide.svg?react";
 import Wallbang from "./../assets/images/wallbang.svg?react";
 import LogoCT from "./../assets/images/logo_CT_default.png";
 import LogoT from "./../assets/images/logo_T_default.png";
-import SmallBomb from "./../assets/images/bomb.svg?react";
+import SmallBomb from "./../assets/images/icon_c4_default.svg?react";
 import Kills from "./../assets/images/icon_kills.svg?react";
 import playerCT from "./../assets/images/player_CT_default.png";
 import playerT from "./../assets/images/player_T_default.png";
