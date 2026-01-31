@@ -9,6 +9,7 @@ import {
   HealthFull,
   Bullets,
 } from "../../assets/Icons";
+import Health from "../../assets/images/Health_white.svg";
 import { apiUrl } from "./../../API";
 import { useAction } from "../../API/contexts/actions";
 import Bomb from "../Indicators/Bomb";
@@ -22,18 +23,140 @@ const Observed = ({ player }: { player: Player | null }) => {
   });
 
   if (!player) return null;
+
+  const weapons = player.weapons.map((weapon) => ({
+    ...weapon,
+    name: weapon.name.replace("weapon_", ""),
+  }));
+
+  const grenades = weapons.filter((weapon) => weapon.type === "Grenade");
+
   const currentWeapon = player.weapons.filter(
-    (weapon) => weapon.state === "active"
+    (weapon) => weapon.state === "active",
   )[0];
   const knife =
     player.weapons.filter((weapon) => weapon.type === "Knife")[0] || null;
   const grenade =
     player.weapons.filter(
-      (weapon) => weapon.type === "Grenade" && weapon.state === "active"
+      (weapon) => weapon.type === "Grenade" && weapon.state === "active",
     )[0] || null;
   const healthbarWidth = { width: `${player.state.health}%` };
 
   return (
+    <div className="observed_container">
+      <div className="observed_wrapper">
+        <div className="observed_top">
+          <div className="name">{player.name}</div>
+          <div className="healtharmor">
+            <div className="health">
+              <div className="health_icon icon">
+                <img src={Health} />
+              </div>
+              <div className="health_text">{player.state.health}</div>
+            </div>
+            {player.state.armor > 0 && (
+              <div className="armor-icon icon">
+                {player.state.helmet ? <ArmorHelmet /> : <ArmorFull />}
+              </div>
+            )}
+          </div>
+        </div>
+        <div className={`observed_bottom ${player.team.side}`}>
+          <div className="util">
+            <div className="bomb_kit_container">
+              <Bomb player={player} />
+              <Defuse player={player} />
+            </div>
+            {grenades.map((grenade) => [
+              <Weapon
+                key={`${grenade.name}-${grenade.state}`}
+                weapon={grenade.name}
+                active={grenade.state === "active"}
+                isGrenade
+              />,
+              grenade.ammo_reserve === 2 ? (
+                <Weapon
+                  key={`${grenade.name}-${grenade.state}-double`}
+                  weapon={grenade.name}
+                  active={false}
+                  isGrenade
+                />
+              ) : null,
+            ])}
+          </div>
+          <div className="ammo_container">
+            {currentWeapon ? (
+              (() => {
+                switch (currentWeapon.type) {
+                  case "Knife":
+                    return (
+                      <div className="knife_holder">
+                        <Weapon
+                          active={knife.state === "active"}
+                          weapon={knife.name}
+                        />
+                      </div>
+                    );
+                  case "Grenade":
+                    return (
+                      <div className="grenade_holder">
+                        <Weapon
+                          active={grenade.state === "active"}
+                          weapon={grenade.name}
+                        />
+                      </div>
+                    );
+                  case "C4":
+                    return null;
+                  default:
+                    return (
+                      <div className="ammo">
+                        <div className="ammo_counter">
+                          <div className="ammo_clip">
+                            {(currentWeapon && currentWeapon.ammo_clip) || "-"}
+                          </div>
+                          <div className="ammo_reserve">
+                            /
+                            {(currentWeapon && currentWeapon.ammo_reserve) ||
+                              "0"}
+                          </div>
+                        </div>
+                        <div className="ammo_icon_container">
+                          <Bullets />
+                        </div>
+                      </div>
+                    );
+                }
+              })()
+            ) : (
+              // When reloading
+              <div className="ammo">
+                <div className="ammo_counter">
+                  <div className="ammo_clip">-</div>
+                  <div className="ammo_reserve">/ -</div>
+                </div>
+                <div className="ammo_icon_container">
+                  <Bullets />
+                </div>
+              </div>
+            )}
+          </div>
+          <div className={`avatar_holder`}>
+            <Avatar
+              teamId={player.team.id}
+              steamid={player.steamid}
+              height={140}
+              width={140}
+              showCam={showCam}
+              slot={player.observer_slot}
+              teamSide={player.team.side}
+            />
+          </div>
+          <div className="healthbar" style={healthbarWidth}></div>
+        </div>
+      </div>
+    </div>
+    /**
     <div className="observed_container">
       <div className={`avatar_holder ${player.team.side}`}>
         <Avatar
@@ -133,6 +256,7 @@ const Observed = ({ player }: { player: Player | null }) => {
         </div>
       </div>
     </div>
+    */
   );
 };
 

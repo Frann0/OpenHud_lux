@@ -93,6 +93,7 @@ const Player = ({ player, isObserved }: IProps) => {
   const secondary =
     weapons.filter((weapon) => weapon.type === "Pistol")[0] || null;
   const grenades = weapons.filter((weapon) => weapon.type === "Grenade");
+
   const isLeft = player.team.orientation === "left";
   const zeus = weapons.find((weapon) => weapon.name === "taser") || null;
 

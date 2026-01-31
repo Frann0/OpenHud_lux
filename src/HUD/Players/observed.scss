@@ -1,5 +1,210 @@
 .observed_container {
   position: fixed;
+  width: 600px;
+  display: flex;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  flex-direction: column;
+  max-height: 140px;
+
+  .observed_wrapper {
+    border-radius: var(--border-radius);
+    background-color: var(--sub-panel-color);
+    display: flex;
+    flex-direction: column;
+    height: 80px;
+
+    .observed_top {
+      display: flex;
+      flex: 1;
+      height: 40px;
+      flex-direction: row;
+      align-items: center;
+      gap: 160px;
+      padding: 10px;
+      box-sizing: border-box;
+
+      .name {
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        flex: 1;
+        text-align: right;
+      }
+
+      .healtharmor {
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+
+        .health {
+          display: flex;
+          flex-direction: row;
+          gap: 5px;
+
+          .health_icon {
+            height: 24px;
+            width: 24px;
+            fill: white;
+
+            > img {
+              width: 24px;
+              fill: white;
+              height: 24px;
+            }
+          }
+
+          .health_text {
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            align-self: center;
+          }
+        }
+
+        .armor-icon {
+          height: 24px;
+          width: 24px;
+          fill: white;
+
+          > svg {
+            width: 24px;
+            height: 24px;
+          }
+        }
+      }
+    }
+
+    .observed_bottom {
+      display: flex;
+      flex: 1;
+      height: 40px;
+      flex-direction: row;
+      position: relative;
+      align-items: center;
+      gap: 160px;
+      .avatar_holder {
+        position: absolute;
+        bottom: 0;
+        transform-origin: bottom;
+        width: 140px;
+        height: 140px;
+        z-index: 3;
+        left: 50%;
+        transform: translateX(-50%);
+        .avatar {
+          align-self: flex-end;
+          display: flex;
+          position: relative;
+          width: 140px;
+          height: 140px;
+        }
+      }
+
+      .util {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: end;
+        z-index: 2;
+        flex: 1;
+
+        > svg {
+          width: 24px;
+          height: 24px;
+        }
+
+        .bomb_kit_container {
+          height: 100%;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          svg {
+            height: 24px;
+            width: 24px;
+          }
+          .defuse_indicator {
+            fill: white;
+            align-self: center;
+            display: flex;
+            align-items: center;
+          }
+          .bomb_indicator {
+            fill: white;
+            align-self: center;
+            display: flex;
+            align-items: center;
+          }
+        }
+      }
+
+      .ammo_container {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: start;
+
+        z-index: 2;
+        flex: 1;
+
+        .ammo {
+          width: 100%;
+          display: flex;
+          flex-direction: row-reverse;
+          justify-content: start;
+          gap: 10px;
+          &_counter {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-self: center;
+            font-size: 18px;
+            color: white;
+            font-weight: bold;
+          }
+        }
+
+        .ammo_icon_container {
+          width: 24px;
+          height: 24px;
+          fill: white;
+
+          > svg {
+            width: 24px;
+            height: 24px;
+          }
+        }
+      }
+
+      .healthbar {
+        position: absolute;
+        left: 0;
+        right: 0;
+        background-color: var(--color-new-ct);
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        transition: width 0.3s ease-in-out;
+        border-radius: 0 0 var(--border-radius) var(--border-radius);
+      }
+
+      &.T {
+        .healthbar {
+          background-color: var(--color-new-t);
+        }
+      }
+      &.CT {
+        .healthbar {
+          background-color: var(--color-new-ct);
+        }
+      }
+    }
+  }
+}
+/**
+.observed_container {
+  position: fixed;
   width: 22rem;
   bottom: 5%;
   left: 50%;
@@ -260,3 +465,5 @@
     }
   }
 }
+
+*/
