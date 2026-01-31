@@ -100,6 +100,7 @@ const Player = ({ player, isObserved }: IProps) => {
   return (
     <div className={`player_wrapper ${isObserved ? "active" : ""}`}>
       <div className={`player ${player.state.health === 0 ? "dead" : ""} `}>
+        <div className="obs_slot">{player.observer_slot}</div>
         <Avatar
           teamId={player.team.id}
           steamid={player.steamid}

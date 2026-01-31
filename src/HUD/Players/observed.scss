@@ -106,6 +106,21 @@
         }
       }
 
+      .avatar_clan_logo {
+        position: absolute;
+        bottom: 0;
+        transform-origin: bottom;
+        width: 150px;
+        height: 150px;
+
+        z-index: 2;
+        left: 50%;
+        transform: translateX(-50%);
+        > img {
+          object-fit: contain;
+        }
+      }
+
       .util {
         display: flex;
         flex-direction: row;

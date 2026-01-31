@@ -152,6 +152,7 @@ const Observed = ({ player }: { player: Player | null }) => {
               teamSide={player.team.side}
             />
           </div>
+
           <div className="healthbar" style={healthbarWidth}></div>
         </div>
       </div>

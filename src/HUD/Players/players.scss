@@ -222,6 +222,7 @@
       height: 5px;
       // background-color: red;
       z-index: 2;
+      transition: width 0.3s ease-in-out;
     }
 
     .round_damage {
@@ -243,6 +244,21 @@
       box-sizing: border-box;
       width: 100%;
       gap: 10px;
+      position: relative;
+
+      .obs_slot {
+        width: 18px;
+        height: 18px;
+        color: white;
+        background-color: var(--sub-panel-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        z-index: 99;
+        border-radius: 10px;
+        font-size: 14px;
+      }
 
       .avatar {
         z-index: 3;
