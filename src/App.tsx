@@ -6,11 +6,13 @@ import { Match } from "./API/types";
 import { socket } from "./API/socket";
 import api from "./API";
 import { GSI } from "./API/HUD";
-import { ONGSI } from "./API/contexts/actions";
+import { actions, ONGSI, useAction } from "./API/contexts/actions";
+import ActionBridge from "./API/contexts/ActionsBridge";
 
 const App = () => {
   const [game, setGame] = useState<CSGO | null>(null);
   const [currentMatch, setCurrentMatch] = useState<Match | null>(null);
+  const [test, setTest] = useState(false);
 
   useEffect(() => {
     const onMatchPing = () => {
@@ -90,7 +92,23 @@ const App = () => {
     [],
   );
 
-  if (!game) return null;
+useAction(
+  "radarBigger",
+  () => {
+    setTest((prev) => {
+      console.log("radarBigger called, prev:", prev, "next:", !prev);
+      return !prev;
+    });
+  },
+  [],
+);
+
+  if (!game) return( <>
+ 
+    <div>{String(test)}</div>
+
+  </>
+  )
 
   return <Layout game={game} match={currentMatch} />;
 };

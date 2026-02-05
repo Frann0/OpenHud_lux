@@ -81,7 +81,7 @@ export function ONGSI<T extends BaseEvents>(
 ) {
   useEffect(
     () => {
-      console.log(event);
+      console.log(callback);
       GSI.on(event, callback);
 
       return () => {

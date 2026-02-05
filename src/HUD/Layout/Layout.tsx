@@ -17,6 +17,7 @@ import Timeout from "../PauseTimeout/Timeout";
 import { CSGO } from "csgogsi";
 import { Match } from "../../API/types";
 import { useAction } from "../../API/contexts/actions";
+import ActionBridge from "../../API/contexts/ActionsBridge";
 interface Props {
   game: CSGO;
   match: Match | null;
@@ -63,6 +64,7 @@ const Layout = ({ game, match }: Props) => {
     (game.round && game.round.phase === "freezetime") ||
     game.phase_countdowns.phase === "freezetime";
   return (
+    <>
     <div className="layout">
       <div className={`players_alive`}>
         <div className="title_container">Players alive</div>
@@ -158,6 +160,7 @@ const Layout = ({ game, match }: Props) => {
         />
       </div>
     </div>
+    </>
   );
 };
 export default Layout;
