@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "actions": [
+    { "id": "toggleCams", "label": "Toggle Cameras" },
+    { "id": "radarBigger", "label": "Radar Bigger" },
+    { "id": "radarSmaller", "label": "Radar Smaller" }
+  ]
+}

@@ -26,6 +26,7 @@
   top: 15px;
   left: 50%;
   transform: translateX(-50%);
+  isolation: isolate;
   .CT {
     color: var(--color-new-ct);
     .round-thingy {
@@ -56,6 +57,10 @@
     border-radius: var(--border-radius);
     border: 1px solid var(--gold);
     box-sizing: border-box;
+    z-index: 5;
+    box-shadow:
+      0 0 16px rgba(255, 190, 60, 0.22),
+      0 0 32px rgba(255, 190, 60, 0.1);
 
     &::after {
       content: "";
@@ -76,6 +81,7 @@
       border-left: 15px solid transparent;
     }
   }
+
   #bomb_container {
     display: flex;
     flex-direction: column;
