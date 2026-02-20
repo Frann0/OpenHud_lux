@@ -62,6 +62,7 @@
       0 0 16px rgba(255, 190, 60, 0.22),
       0 0 32px rgba(255, 190, 60, 0.1);
 
+    /*
     &::after {
       content: "";
       position: absolute;
@@ -79,6 +80,29 @@
       z-index: -1;
       border-top: 15px solid var(--gold);
       border-left: 15px solid transparent;
+*/
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      right: 0;
+      width: 488px;
+      height: 40px;
+      background: url("../../assets/images/Lensflare2.png") no-repeat;
+      pointer-events: none;
+      z-index: 0;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 488px;
+      height: 40px;
+      background: url("../../assets/images/Lensflare2.png") no-repeat;
+      transform: scaleX(-1);
+      pointer-events: none;
+      z-index: 0;
     }
   }
 
